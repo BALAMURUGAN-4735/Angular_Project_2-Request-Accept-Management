@@ -1,0 +1,131 @@
+<div class="dashboard-container">
+  <div class="header">
+    <h2>Welcome {{ user?.name || 'User' }}</h2>
+    <div class="header-actions">
+      <button class="btn-add" (click)="openPopup()">+ Add Request</button>
+      <button class="btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <div class="filter-controls">
+      <div class="input-group id-search">
+        <input
+          type="number"
+          placeholder="🔍 Search Request ID..."
+          [(ngModel)]="filterId"
+          (input)="filterTable()"
+          class="form-input">
+      </div>
+      
+      <div class="input-group text-search">
+        <input
+          type="text"
+          placeholder="🔍 Filter by Title or Description..."
+          [(ngModel)]="filterText"
+          (input)="filterTable()"
+          class="form-input">
+      </div>
+
+      <button
+        class="btn-reset"
+        (click)="resetFilters()"
+        *ngIf="filterId || filterText || selectedStatusTab !== 'ALL'">
+        Clear
+      </button>
+    </div>
+
+    <div class="status-tabs-row">
+      <button
+        *ngFor="let tab of ['ALL', 'PENDING', 'ACCEPTED', 'DECLINED']"
+        class="tab-btn"
+        [class.active]="selectedStatusTab === tab"
+        (click)="setStatusTab(tab)">
+        {{ tab }}
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Request ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Reason</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of filteredRequests">
+          <td class="id-col">#{{ r?.id }}</td>
+          <td class="title-col">{{ r?.title }}</td>
+          <td>{{ r?.description }}</td>
+          <td class="date-col">{{ r?.createdDate || '-' }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="(r?.status || 'PENDING').toLowerCase()">
+              {{ r?.status || 'PENDING' }}
+            </span>
+          </td>
+          <td class="reason-cell">
+            {{ r?.declineReason || r?.reason || '-' }}
+          </td>
+          <td class="actions-col">
+            <!-- 🟢 DYNAMIC BUTTON: Shows 'Resubmit' if Declined, 'Edit' if Pending -->
+            <button
+              *ngIf="r.status?.toUpperCase() === 'PENDING' || r.status?.toUpperCase() === 'DECLINED'"
+              (click)="openEditModal(r)"
+              class="btn-edit">
+              {{ r.status?.toUpperCase() === 'DECLINED' ? 'Resubmit' : 'Edit' }}
+            </button>
+
+            <button
+              (click)="r.status !== 'Cancelled' && deleteRequest(r.id)"
+              [disabled]="r.status === 'Cancelled'"
+              [class.disabled-btn]="r.status === 'Cancelled'"
+              class="btn-delete">
+              {{ r.status === 'Cancelled' ? 'Deleted' : 'Delete' }}
+            </button>
+          </td>
+        </tr>
+        
+        <tr *ngIf="filteredRequests.length === 0">
+          <td colspan="7" class="no-data">
+            No matching requests found for your active filters.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="popup-backdrop" *ngIf="showPopup">
+  <div class="popup-box">
+    <!-- 🟢 DYNAMIC POPUP TITLE -->
+    <h3>{{ isEditing ? (isResubmitting ? 'Resubmit Request' : 'Edit Request') : 'Add Request' }}</h3>
+    <form [formGroup]="requestForm">
+      <div class="form-field ">
+        <label>Request Title</label>
+        <input type="text" placeholder="Title" formControlName="title" class="form-input">
+      </div>
+
+      <div class="form-field">
+        <label>Detailed Description</label>
+        <textarea placeholder="Description" formControlName="description" class="form-input"></textarea>
+      </div>
+
+      <div class="form-field">
+        <label>Submission Date</label>
+        <input type="date" formControlName="createdDate" class="form-input">
+      </div>
+
+      <div class="popup-actions">
+        <button type="button" class="btn-submit" (click)="submitRequest()">Submit</button>
+        <button type="button" class="btn-cancel" (click)="closePopup()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

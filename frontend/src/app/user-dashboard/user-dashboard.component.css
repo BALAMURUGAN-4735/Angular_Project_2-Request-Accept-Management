@@ -1,0 +1,313 @@
+/* ==========================================
+   MAIN LAYOUT & CONTAINER DEFINITIONS
+   ========================================== */
+.dashboard-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #2d3748;
+}
+
+/* Header UI Elements */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 16px;
+}
+.header h2 {
+  font-size: 28px;
+  color: #1a202c;
+  margin: 0;
+}
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Base Button Configurations */
+button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+.btn-add { 
+  background-color: #3182ce; 
+  color: white; 
+  box-shadow: 0 2px 4px rgba(49, 130, 206, 0.2);
+}
+.btn-add:hover { 
+  background-color: #2b6cb0; 
+  transform: translateY(-1px);
+}
+.btn-logout { 
+  background-color: #edf2f7; 
+  color: #4a5568; 
+}
+.btn-logout:hover { 
+  background-color: #e2e8f0; 
+}
+
+/* ==========================================
+   FILTER REGION LAYOUT STYLEMAP
+   ========================================== */
+.filter-section {
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.filter-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.input-group {
+  flex: 1;
+}
+.id-search {
+  max-width: 220px;
+}
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: white;
+}
+.form-input:focus {
+  border-color: #3182ce;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+.btn-reset { 
+  background-color: #fed7d7; 
+  color: #9b2c2c; 
+}
+.btn-reset:hover { 
+  background-color: #feb2b2; 
+}
+
+/* Status Horizontal Selection Row */
+.status-tabs-row {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+.tab-btn {
+  background: none;
+  color: #718096;
+  border-radius: 4px 4px 0 0;
+  padding: 8px 16px;
+}
+.tab-btn:hover { 
+  color: #2d3748; 
+  background-color: #edf2f7; 
+}
+.tab-btn.active {
+  color: #3182ce;
+  border-bottom: 3px solid #3182ce;
+  background-color: rgba(66, 153, 225, 0.05);
+  font-weight: 700;
+}
+
+/* ==========================================
+   DATA GRID DATA-TABLE LAYOUT DESIGN
+   ========================================== */
+.table-container {
+  overflow-x: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background: white;
+}
+th {
+  background-color: #3182ce;
+  color: white;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+td {
+  padding: 14px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 14px;
+}
+tr:hover { 
+  background-color: #f7fafc; 
+}
+
+.id-col { font-weight: bold; color: #4a5568; }
+.title-col { font-weight: 600; color: #1a202c; }
+.date-col { color: #4a5568; }
+.reason-cell { color: #718096; font-style: italic; }
+
+/* Dashboard Status Badges */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.status-badge.pending { background-color: #feebc8; color: #c05621; }
+.status-badge.accepted { background-color: #c6f6d5; color: #22543d; }
+.status-badge.declined { background-color: #fed7d7; color: #9b2c2c; }
+.status-badge.cancelled { background-color: #e2e8f0; color: #4a5568; }
+
+/* Grid Line Operations Elements */
+.actions-col { 
+  display: flex; 
+  gap: 8px; 
+}
+.btn-edit { 
+  background-color: #ecc94b; 
+  color: #744210; 
+  padding: 6px 12px;
+  font-size: 13px;
+}
+.btn-edit:hover { 
+  background-color: #d69e2e; 
+}
+.btn-delete { 
+  background-color: #e53e3e; 
+  color: white; 
+  padding: 6px 12px;
+  font-size: 13px;
+}
+.btn-delete:hover { 
+  background-color: #c53030; 
+}
+.disabled-btn { 
+  background-color: #cbd5e0 !important; 
+  color: #718096 !important; 
+  cursor: not-allowed !important; 
+  transform: none !important;
+}
+
+.no-data { 
+  text-align: center; 
+  color: #a0aec0; 
+  padding: 40px; 
+  font-weight: 500;
+}
+
+/* ==========================================
+   POPUP MODAL STYLING (BACKDROP BLUR)
+   ========================================== */
+.popup-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 32, 44, 0.6); 
+  backdrop-filter: blur(4px); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.popup-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px; 
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideUp 0.25s ease-out;
+}
+
+.popup-box h3 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 22px;
+  color: #1a202c;
+  font-weight: 700;
+  border-bottom: 1px solid #edf2f7;
+  padding-bottom: 12px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+textarea.form-input {
+  min-height: 110px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 26px;
+  border-top: 1px solid #edf2f7;
+  padding-top: 16px;
+}
+
+.btn-submit {
+  background-color: #38a169;
+  color: white;
+  box-shadow: 0 2px 4px rgba(56, 161, 105, 0.2);
+}
+.btn-submit:hover {
+  background-color: #2f855a;
+  transform: translateY(-1px);
+}
+
+.btn-cancel {
+  background-color: #edf2f7;
+  color: #4a5568;
+}
+.btn-cancel:hover {
+  background-color: #e2e8f0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateY(15px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.popup-box .form-field input[type="text"] {
+  text-transform: uppercase;
+}
+
+

@@ -1,0 +1,37 @@
+<div class="page-wrapper">
+  <div class="container">
+    <h2>Forgot Password</h2>
+
+    <div class="form-group">
+      <input 
+        type="email" 
+        placeholder="Enter Email"
+        [(ngModel)]="email"
+        class="form-input">
+    </div>
+
+    <div class="form-group">
+      <div class="password-box">
+        <input 
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="New Password"
+          [(ngModel)]="newPassword" 
+          required
+          class="form-input">
+        <span class="eye-icon" (click)="togglePassword()">
+          {{ showPassword ? '🙈' : '👁️' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="action-group">
+      <button class="btn-primary" (click)="resetPassword()">
+        Reset Password
+      </button>
+      <button class="btn-secondary" (click)="back()">
+        Back to Login
+      </button>
+    </div>
+    
+  </div>
+</div>
